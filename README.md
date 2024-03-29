@@ -1,7 +1,7 @@
 # Siber Güvenlik Quiz Uygulaması
 
 ## Proje Amacı:
-Bu projenin ana amacı, Flutter kullanarak siber güvenlik konusundaki bilgi ve farkındalığı artırmak için interaktif bir quiz uygulaması geliştirmektir. Bu uygulama, kullanıcıların siber güvenlik bilgisini test etmelerine olanak tanırken aynı zamanda bilgi kartları aracılığıyla yeni bilgiler öğrenmelerini sağlayacaktır.
+Bu projenin ana amacı, React Native kullanarak siber güvenlik konusundaki bilgi ve farkındalığı artırmak için interaktif bir quiz uygulaması geliştirmektir. Bu uygulama, kullanıcıların siber güvenlik bilgisini test etmelerine olanak tanırken aynı zamanda bilgi kartları aracılığıyla yeni bilgiler öğrenmelerini sağlayacaktır.
 
 
 ## Faydaları:
