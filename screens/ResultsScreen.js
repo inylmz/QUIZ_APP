@@ -18,9 +18,9 @@ const ResultsScreen = ({ route, navigation }) => {
       </View>
       <Pressable
         style={styles.button}
-        onPress={() => navigation.navigate('RedHomeScreen')}
+        onPress={() => navigation.navigate('Home')}
       >
-        <Text style={styles.buttonText}>Anasayfa</Text>
+        <Text style={styles.buttonText}>Bitti</Text>
       </Pressable>
     </SafeAreaView>
   );
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: 'darkgreen',
     paddingHorizontal: 60,
     paddingVertical: 10,
     borderRadius: 30,

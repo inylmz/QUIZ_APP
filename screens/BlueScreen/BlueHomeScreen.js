@@ -21,7 +21,7 @@ const HomeScreen = () => {
               fontWeight: "600",
             }}
           >
-            QUIZ KURALLARI
+            BLUE TEAM
           </Text>
 
           <View
@@ -49,7 +49,7 @@ const HomeScreen = () => {
                   fontWeight: "500",
                 }}
               >
-                Her sorunun 15 saniyelik bir zaman sınırı vardır.
+                Quize başlamadan önce bilgi kartları ile pratik yapabilirsiniz.
               </Text>
             </View>
 
@@ -60,17 +60,7 @@ const HomeScreen = () => {
                 marginVertical: 5,
               }}
             >
-              <Text style={{ color: "white" }}>•</Text>
-              <Text
-                style={{
-                  marginLeft: 4,
-                  color: "#722F37",
-                  fontSize: 15,
-                  fontWeight: "500",
-                }}
-              >
-                Tüm soruları zorunlu olarak cevaplamalısınız.
-              </Text>
+            
             </View>
           </View>
         </View>
@@ -84,7 +74,7 @@ const HomeScreen = () => {
             borderRadius: 25,
             marginLeft: "auto",
             marginRight: "auto",
-            marginTop: 30,
+            marginTop: 20,
           }}
         >
           <Text style={{color:"white",fontWeight:"600",textAlign:"center"}}>Blue Team Quiz</Text>
@@ -102,6 +92,20 @@ const HomeScreen = () => {
           }}
         >
           <Text style={{color:"white",fontWeight:"600",textAlign:"center"}}>Bilgi Kartları</Text>
+        </Pressable>
+        <Pressable
+        onPress={() => navigation.navigate("Anasayfa")}
+          style={{
+            backgroundColor: "green",
+            padding: 14,
+            width:150,
+            borderRadius: 25,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 30,
+          }}
+        >
+          <Text style={{color:"white",fontWeight:"600",textAlign:"center"}}>Anasayfa</Text>
         </Pressable>
       </View>
     </ScrollView>

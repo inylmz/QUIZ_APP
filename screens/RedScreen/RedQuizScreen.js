@@ -27,7 +27,7 @@ const QuizScreen = () => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswerIndex(null);
     } else {
-      navigation.navigate('Results', { // Sonuçlar ekranına yönlendirme
+      navigation.navigate('Results', { 
         answers: answers,
         points: points,
       });
