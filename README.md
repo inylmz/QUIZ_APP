@@ -28,8 +28,6 @@ Bu projenin ana amacı, React Native kullanarak siber güvenlik konusundaki bilg
 
 **Bilgi Kartları:** Kullanıcıların siber güvenlikle ilgili konularda derinlemesine bilgi edinmelerini sağlayacak bilgi kartları sunar.
 
-**Kullanıcı Profili:** Kullanıcıların ilerleme kaydını tutar ve belirli bir seviyeye ulaştıklarında başarılarını gösterir.
-
 **Gelişmiş Kullanıcı Deneyimi:** Arayüz tasarımı ve kullanıcı etkileşimi, kullanıcıların uygulamayı kolayca kullanmasını sağlayacak şekilde tasarlanır.
 
 **Güncel Kalma:** Uygulama sürekli olarak güncellenir ve yeni bilgiler eklenir.
