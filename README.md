@@ -34,8 +34,3 @@ Bu projenin ana amacı, React Native kullanarak siber güvenlik konusundaki bilg
 
 
 
-
-## Screenler
-
-<img src="home.png" height="500">
-
