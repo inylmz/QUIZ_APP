@@ -35,7 +35,8 @@ Bu projenin ana amacı, React Native kullanarak siber güvenlik konusundaki bilg
 
 
 ## Screens
-![home](https://github.com/inylmz/QUIZ_APP/assets/122210098/ea109dcf-6782-4f6b-b78e-675d3bb07e40)
+![home](https://github.com/inylmz/QUIZ_APP/assets/122210098/ea109dcf-6782-4f6b-b78e-675d3bb07e40?raw=true&width=200&height=200)
+
 
 ![RedHomeScreen](https://github.com/inylmz/QUIZ_APP/assets/122210098/4daf538d-5c50-48a7-839d-144fd2e8489a)
 
