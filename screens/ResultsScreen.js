@@ -1,119 +1,62 @@
-import {
-    StyleSheet,
-    Text,
-    SafeAreaView,
-    View,
-    Pressable,
-    FlatList,
-  } from "react-native";
-  import React from "react";
-  import { useRoute } from "@react-navigation/native";
-  import { AntDesign } from "@expo/vector-icons";
+import React from 'react';
+import { View, Text, StyleSheet, SafeAreaView, Pressable, Image } from 'react-native';
 
-  const ResultsScreen = () => {
-    const route = useRoute();
-    // console.log(route.params);
-    return (
-      <SafeAreaView style={{ margin: 10 }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-         
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginRight: 14,
-            }}
-          >
-            <Text>Share</Text>
-            <AntDesign
-              style={{ marginLeft: 4 }}
-              name="sharealt"
-              size={18}
-              color="black"
-            />
-          </View>
-        </View>
-  
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginVertical: 10,
-          }}
-        >
-          <Text>Cevaplanan Sorular</Text>
-          <Text>(5/5)</Text>
-        </View>
-  
-        <Pressable
-          style={{
-            backgroundColor: "white",
-            height: 220,
-            borderRadius: 7,
-            marginTop: 20,
-          }}
-        >
-          <Text
-            style={{
-              color: "magenta",
-              fontSize: 15,
-              fontWeight: "500",
-              textAlign: "center",
-              marginTop: 8,
-            }}
-          >
-            Skor
-          </Text>
-          <FlatList
-            numColumns={2}
-            data={route.params.answers}
-            renderItem={({ item, i }) => (
-              <View
-                style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: 10,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginLeft:"auto",
-                  marginRight:"auto"
-                }}
-              >
-                <Text>{item.question}</Text>
-                {item.answer === true ? (
-                  <AntDesign style={{marginLeft:5}} name="checkcircle" size={20} color="green" />
-                ) : (
-                  <AntDesign style={{marginLeft:5}} name="closecircle" size={20} color="red" />
-                )}
-              </View>
-            )}
-          />
-  
-          <Pressable
- 
-             style={{
-             backgroundColor:"green",
-             padding:8,marginLeft:"auto",
-             marginRight:"auto",
-             marginBottom:20,
-             borderRadius:5}}
-             >
+const ResultsScreen = ({ route, navigation }) => {
+  const { points } = route.params;
 
-            <Text style={{color:"white",textAlign:"center"}}>Bitti</Text>
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.resultContainer}>
+        <Text style={styles.resultText}>SKOR</Text>
+        <Text style={styles.pointsText}>{points} Puan</Text>
 
-          </Pressable>
-        </Pressable>
-      </SafeAreaView>
-    );
-  };
-  
-  export default ResultsScreen;
-  
-  const styles = StyleSheet.create({});
+        <Image
+          source={require('../assets/result.png')} // Resminizin yolunu doğru şekilde belirtin
+          style={styles.image}
+        />
+
+      </View>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate('Home')}
+      >
+        <Text style={styles.buttonText}>Bitti</Text>
+      </Pressable>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    paddingHorizontal: 90,
+  },
+  resultContainer: {
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  resultText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  pointsText: {
+    fontSize: 18,
+  },
+  button: {
+    backgroundColor: 'darkgreen',
+    paddingHorizontal: 60,
+    paddingVertical: 10,
+    borderRadius: 30,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
+export default ResultsScreen;
