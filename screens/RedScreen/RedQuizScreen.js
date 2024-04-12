@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Pressable, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import questions from '../../data/redQuestions'; // RedQuestions veri dosyasını burada dahil edin
-import { useNavigation } from '@react-navigation/native'; // useNavigation ekleyin
+import questions from '../../data/redQuestions'; 
+import { useNavigation } from '@react-navigation/native'; 
 
 const QuizScreen = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const [answers, setAnswers] = useState([]);
   const [points, setPoints] = useState(0);
-  const navigation = useNavigation(); // navigation ekleyin
+  const navigation = useNavigation(); 
 
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -31,7 +31,7 @@ const QuizScreen = () => {
         answers: answers,
         points: points,
       });
-      // Quiz bitince state'leri sıfırla
+     
       setCurrentQuestionIndex(0);
       setSelectedAnswerIndex(null);
       setAnswers([]);

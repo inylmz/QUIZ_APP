@@ -25,6 +25,7 @@ const StackNavigator = () => {
         <Stack.Screen name="BlueCards" component={BlueCardsScreen} options={{headerShown:false}}/>
         <Stack.Screen name="RedHomeScreen" component={RedHomeScreen} options={{headerShown:false}}/>
         <Stack.Screen name="RedCards" component={RedCardsScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Anasayfa" component={HomeScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
