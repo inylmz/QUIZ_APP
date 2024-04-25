@@ -3,11 +3,6 @@ import { View, Text, StyleSheet, SafeAreaView, Pressable, ScrollView } from 'rea
 import { AntDesign } from '@expo/vector-icons';
 import questions from '../../data/redQuestions'; 
 import { useNavigation } from '@react-navigation/native'; 
-import questions from '../../data/redQuestions'; // RedQuestions veri dosyasını burada dahil edin
-import { useNavigation } from '@react-navigation/native'; // useNavigation ekleyin
-import questions from '../../data/redQuestions'; 
-import { useNavigation } from '@react-navigation/native'; 
-
 const QuizScreen = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
