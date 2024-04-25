@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Pressable, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+<<<<<<< HEAD
 import questions from '../../data/redQuestions'; 
 import { useNavigation } from '@react-navigation/native'; 
+=======
+import questions from '../../data/redQuestions'; // RedQuestions veri dosyasını burada dahil edin
+import { useNavigation } from '@react-navigation/native'; // useNavigation ekleyin
+>>>>>>> 7dca240 (Yeni screenler eklendi)
 
 const QuizScreen = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const [answers, setAnswers] = useState([]);
   const [points, setPoints] = useState(0);
+<<<<<<< HEAD
   const navigation = useNavigation(); 
+=======
+  const navigation = useNavigation(); // navigation ekleyin
+>>>>>>> 7dca240 (Yeni screenler eklendi)
 
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -27,11 +36,19 @@ const QuizScreen = () => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswerIndex(null);
     } else {
+<<<<<<< HEAD
       navigation.navigate('Results', { 
         answers: answers,
         points: points,
       });
      
+=======
+      navigation.navigate('Results', { // Sonuçlar ekranına yönlendirme
+        answers: answers,
+        points: points,
+      });
+      // Quiz bitince state'leri sıfırla
+>>>>>>> 7dca240 (Yeni screenler eklendi)
       setCurrentQuestionIndex(0);
       setSelectedAnswerIndex(null);
       setAnswers([]);

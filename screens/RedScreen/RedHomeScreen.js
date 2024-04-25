@@ -21,7 +21,11 @@ const HomeScreen = () => {
               fontWeight: "600",
             }}
           >
+<<<<<<< HEAD
             RED TEAM
+=======
+            QUIZ KURALLARI
+>>>>>>> 7dca240 (Yeni screenler eklendi)
           </Text>
 
           <View
@@ -49,7 +53,11 @@ const HomeScreen = () => {
                   fontWeight: "500",
                 }}
               >
+<<<<<<< HEAD
                Quize başlamadan önce bilgi kartları ile pratik yapabilirsiniz.
+=======
+                Her sorunun 15 saniyelik bir zaman sınırı vardır.
+>>>>>>> 7dca240 (Yeni screenler eklendi)
               </Text>
             </View>
 
@@ -60,7 +68,21 @@ const HomeScreen = () => {
                 marginVertical: 5,
               }}
             >
+<<<<<<< HEAD
              
+=======
+              <Text style={{ color: "white" }}>•</Text>
+              <Text
+                style={{
+                  marginLeft: 4,
+                  color: "#722F37",
+                  fontSize: 15,
+                  fontWeight: "500",
+                }}
+              >
+                Tüm soruları zorunlu olarak cevaplamalısınız.
+              </Text>
+>>>>>>> 7dca240 (Yeni screenler eklendi)
             </View>
           </View>
         </View>
@@ -74,7 +96,11 @@ const HomeScreen = () => {
             borderRadius: 25,
             marginLeft: "auto",
             marginRight: "auto",
+<<<<<<< HEAD
             marginTop: 10,
+=======
+            marginTop: 30,
+>>>>>>> 7dca240 (Yeni screenler eklendi)
           }}
         >
           <Text style={{color:"white",fontWeight:"600",textAlign:"center"}}>Red Team Quiz</Text>
@@ -93,6 +119,7 @@ const HomeScreen = () => {
         >
           <Text style={{color:"white",fontWeight:"600",textAlign:"center"}}>Bilgi Kartları</Text>
         </Pressable>
+<<<<<<< HEAD
         <Pressable
         onPress={() => navigation.navigate("Anasayfa")}
           style={{
@@ -107,9 +134,17 @@ const HomeScreen = () => {
         >
           <Text style={{color:"white",fontWeight:"600",textAlign:"center"}}>Anasayfa</Text>
         </Pressable>
+=======
+>>>>>>> 7dca240 (Yeni screenler eklendi)
       </View>
     </ScrollView>
   );
 };
 
+<<<<<<< HEAD
 export default HomeScreen;
+=======
+export default HomeScreen;
+
+const styles = StyleSheet.create({});
+>>>>>>> 7dca240 (Yeni screenler eklendi)
