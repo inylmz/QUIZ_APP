@@ -18,15 +18,9 @@ const ResultsScreen = ({ route, navigation }) => {
       </View>
       <Pressable
         style={styles.button}
-<<<<<<< HEAD
         onPress={() => navigation.navigate('Home')}
       >
         <Text style={styles.buttonText}>Bitti</Text>
-=======
-        onPress={() => navigation.navigate('RedHomeScreen')}
-      >
-        <Text style={styles.buttonText}>Anasayfa</Text>
->>>>>>> 7dca240 (Yeni screenler eklendi)
       </Pressable>
     </SafeAreaView>
   );
@@ -52,11 +46,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   button: {
-<<<<<<< HEAD
     backgroundColor: 'darkgreen',
-=======
-    backgroundColor: '#007bff',
->>>>>>> 7dca240 (Yeni screenler eklendi)
     paddingHorizontal: 60,
     paddingVertical: 10,
     borderRadius: 30,
