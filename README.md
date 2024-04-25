@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Siber Güvenlik Quiz Uygulaması
 
 ## Proje Amacı:
@@ -49,3 +50,7 @@ Bu projenin ana amacı, React Native kullanarak siber güvenlik konusundaki bilg
 ![BlueCardsScreen](https://github.com/inylmz/QUIZ_APP/assets/122210098/8278b3fb-8e1e-4d12-a35c-377766866c8b)
 
 
+=======
+# QUIZ_APP
+Siber Güvenlik Quiz Uygulaması
+>>>>>>> e6f23c3e5dc946d720fbf87a6a96080eb48e2f38
