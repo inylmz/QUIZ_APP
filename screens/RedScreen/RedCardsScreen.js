@@ -3,49 +3,78 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from
 
 const RedCardsScreen = () => {
   const [terms, setTerms] = useState([
-    { id: 1, title: 'SQL Injection', description: 'SQL Injection, bir web uygulamasına yapılan saldırı türüdür.', category: 'web'},
-    { id: 2, title: 'Cross-Site Scripting (XSS)', description: 'XSS, bir web uygulamasında kullanıcı tarafından enjekte edilen kodun çalıştırılmasına izin veren bir güvenlik açığıdır.', category: 'web' },
-    { id: 3, title: 'Phishing', description: 'Phishing, kullanıcıları yanıltarak hassas bilgilerini elde etmeye çalışan bir saldırı türüdür.' },
-    { id: 4, title: 'Brute Force Attack', description: 'Brute Force Attack, deneme-yanılma yöntemiyle şifre kırma saldırısıdır.', category: 'web' },
-    { id: 5, title: 'Man-in-the-Middle (MitM)', description: 'MitM, iletişim kanalı üzerinde yer alan bir köprüden geçerek verileri ele geçirme saldırısıdır.', category: 'network' },
-    { id: 6, title: 'Denial of Service (DoS)', description: 'DoS, bir servisin normal çalışmasını engellemek için aşırı trafik veya istek gönderme saldırısıdır.', category: 'network' },
-    { id: 7, title: 'Social Engineering', description: 'Social Engineering, insanları manipüle ederek bilgi veya erişim elde etmeye çalışan bir saldırı türüdür.' },
-    { id: 8, title: 'Session Hijacking', description: 'Session Hijacking, bir kullanıcının oturumunu ele geçirme ve yetkisiz erişim sağlama saldırısıdır.', category: 'web' },
-    { id: 9, title: 'Malware', description: 'Malware, kötü amaçlı yazılım olarak bilinir ve bilgisayar sistemlerine zarar vermek için tasarlanmıştır.' },
-    { id: 10, title: 'Spyware', description: 'Spyware, kullanıcıların bilgisayarlarını izlemek ve bilgi çalmak için kullanılan bir tür kötü amaçlı yazılımdır.' },
-    { id: 11, title: 'Session Fixation', description: 'Session Fixation, bir kullanıcının oturumunu ele geçirme saldırısıdır ve kullanıcının oturum kimliğini değiştirmeye çalışır.' },
-    { id: 12, title: 'Clickjacking', description: 'Clickjacking, kullanıcıların bilgisi olmadan istemeden tıklamalarını sağlayan ve kötü amaçlı bir işlem gerçekleştiren bir saldırı türüdür.' },
-    { id: 13, title: 'DNS Spoofing', description: 'DNS Spoofing, DNS sorgularını yönlendirerek kullanıcıları yanıltan bir saldırı türüdür.' },
-    { id: 14, title: 'Ransomware', description: 'Ransomware, bilgisayar sistemlerini kilitleyerek fidye talep eden kötü amaçlı yazılım türüdür.' },
-    { id: 15, title: 'Zero-Day Exploit', description: 'Zero-Day Exploit, henüz düzeltilmemiş bir güvenlik açığından faydalanarak saldırı gerçekleştiren bir saldırı türüdür.' },
-    { id: 16, title: 'Data Breach', description: 'Data Breach, hassas verilerin yetkisiz kişilerce ele geçirilmesi durumudur ve genellikle büyük veri ihlalleriyle ilişkilidir.' },
-    { id: 17, title: 'Backdoor', description: 'Backdoor, bir sistemdeki güvenlik önlemlerini atlayarak yetkisiz erişim sağlayan bir arka kapıdır.' },
-    { id: 18, title: 'Rootkit', description: 'Rootkit, bilgisayar sistemlerine gizlice yerleşen ve sistemde geniş erişim yetkileri sağlayan kötü amaçlı bir yazılım türüdür.' },
-    { id: 19, title: 'Pharming', description: 'Pharming, kullanıcıları yanıltarak doğru web sitesine ulaştıklarını düşündükleri bir saldırıda, yanlış bir web sitesine yönlendiren bir saldırı türüdür.' },
-    { id: 20, title: 'Spoofing', description: 'Spoofing, kimlik veya veri sahtekarlığı yaparak gerçek bir varlık gibi görünmeye çalışan bir saldırı türüdür.' },
-    // Daha fazla terim eklenebilir
+    { id: 1, title: 'Web Saldırıları', category: 'web', items: [
+        { id: 1, title: 'SQL Injection', description: 'SQL Injection, bir web uygulamasına yapılan saldırı türüdür.' },
+        { id: 2, title: 'Cross-Site Scripting (XSS)', description: 'XSS, bir web uygulamasında kullanıcı tarafından enjekte edilen kodun çalıştırılmasına izin veren bir güvenlik açığıdır.' },
+        { id: 3, title: 'Phishing', description: 'Phishing, kullanıcıları yanıltarak hassas bilgilerini elde etmeye çalışan bir saldırı türüdür.' },
+        { id: 4, title: 'Brute Force Attack', description: 'Brute Force Attack, deneme-yanılma yöntemiyle şifre kırma saldırısıdır.' },
+        { id: 8, title: 'Session Hijacking', description: 'Session Hijacking, bir kullanıcının oturumunu ele geçirme ve yetkisiz erişim sağlama saldırısıdır.' },
+      ]
+    },
+    { id: 2, title: 'Mobil Saldırılar', category: 'mobile', items: [
+        { id: 1, title: 'Mobile Malware', description: 'Mobile Malware, mobil cihazlara zarar vermek için tasarlanmış kötü amaçlı yazılımdır.' },
+        { id: 2, title: 'Bluetooth Hacking', description: 'Bluetooth Hacking, Bluetooth bağlantılarını ele geçirme ve kullanıcı verilerini çalma saldırısıdır.' },
+        // Diğer mobil saldırılarına ait soruları buraya ekleyin
+      ]
+    },
+    { id: 3, title: 'Network Saldırıları', category: 'network', items: [
+        { id: 1, title: 'ARP Spoofing', description: 'ARP Spoofing, ağdaki cihazların iletişimini yönlendirerek veri paketlerini ele geçirme saldırısıdır.' },
+        { id: 2, title: 'DNS Poisoning', description: 'DNS Poisoning, DNS sorgularını yönlendirerek kullanıcıları yanıltma ve kötü amaçlı siteye yönlendirme saldırısıdır.' },
+        // Diğer network saldırılarına ait soruları buraya ekleyin
+      ]
+    },
+    { id: 4, title: 'Kriptoloji', category: 'cryptography', items: [
+        { id: 1, title: 'Symmetric Encryption', description: 'Symmetric Encryption, aynı anahtarın kullanıldığı şifreleme yöntemidir.' },
+        { id: 2, title: 'Asymmetric Encryption', description: 'Asymmetric Encryption, farklı anahtarların kullanıldığı şifreleme yöntemidir.' },
+        // Diğer kriptolojiye ait soruları buraya ekleyin
+      ]
+    },
+    { id: 5, title: 'Pentest', category: 'pentest', items: [
+        { id: 1, title: 'External Pentest', description: 'External Pentest, dışarıdan bir saldırgan gibi ağa ve uygulamalara test yapma sürecidir.' },
+        { id: 2, title: 'Internal Pentest', description: 'Internal Pentest, ağ içinden bir saldırgan gibi iç ağa ve sistemlere test yapma sürecidir.' },
+        // Diğer pentest'e ait soruları buraya ekleyin
+      ]
+    },
+    { id: 6, title: 'Burp Suite', category: 'burpSuite', items: [
+        { id: 1, title: 'Burp Proxy', description: 'Burp Proxy, HTTP ve HTTPS trafiğini izlemek, değiştirmek ve engellemek için kullanılan bir araçtır.' },
+        { id: 2, title: 'Burp Scanner', description: 'Burp Scanner, otomatik güvenlik taraması yaparak web uygulamalarında bulunan güvenlik açıklarını tespit eder.' },
+        // Diğer Burp Suite araçlarına ait soruları buraya ekleyin
+      ]
+    },
   ]);
+
   const [selectedTerm, setSelectedTerm] = useState(null);
 
-  const windowWidth = Dimensions.get('window').width;
-  const windowHeight = Dimensions.get('window').height;
-
-  const renderCards = () => {
-    const cardWidth = windowWidth / 2 - 20; // İki kartın genişliği
-
-    return terms.map((term) => (
+  const renderCategoryCards = () => {
+    return terms.map((category) => (
+      <View key={category.id}>
+        <Text style={styles.categoryTitle}>{category.title}</Text>
+        <View style={styles.cardContainer}>
+          {renderCards(category.items, category.id)}
+        </View>
+      </View>
+    ));
+  };
+  
+  const renderCards = (items, categoryId) => {
+    return items.map((term) => (
       <TouchableOpacity
         key={term.id}
-        style={[styles.card, { width: cardWidth, backgroundColor: getCategoryColor(term.category) }]}
-        onPress={() => setSelectedTerm(term)}
+        style={[styles.card, { backgroundColor: getCategoryColor(term.category) }]}
+        onPress={() => handleCardPress(term.id, categoryId)}
       >
         <Text style={styles.title}>{term.title}</Text>
-        {selectedTerm?.id === term.id && (
+        {selectedTerm?.id === term.id && selectedTerm?.categoryId === categoryId && (
           <Text style={styles.description}>{term.description}</Text>
         )}
       </TouchableOpacity>
     ));
   };
+  
+  const handleCardPress = (termId, categoryId) => {
+    setSelectedTerm({ id: termId, categoryId: categoryId });
+  };
+  
 
   const getCategoryColor = (category) => {
     switch (category) {
@@ -53,15 +82,20 @@ const RedCardsScreen = () => {
         return 'purple';
       case 'network':
         return 'green';
-      // Diğer kategoriler için renkleri burada belirleyebilirsiniz
+      case 'cryptography':
+        return 'blue';
+      case 'pentest':
+        return 'orange';
+      case 'burpSuite':
+        return 'pink';
       default:
-        return 'red'; // Varsayılan renk
+        return 'gray'; // Diğer kategoriler için varsayılan renk
     }
   };
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-      <View style={styles.cardContainer}>{renderCards()}</View>
+      {renderCategoryCards()}
     </ScrollView>
   );
 };
@@ -69,9 +103,13 @@ const RedCardsScreen = () => {
 const styles = StyleSheet.create({
   scrollViewContainer: {
     flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingVertical: 20,
+  },
+  categoryTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 10,
   },
   cardContainer: {
     flexDirection: 'row',
@@ -81,6 +119,7 @@ const styles = StyleSheet.create({
   },
   card: {
     aspectRatio: 1,
+    width: Dimensions.get('window').width / 2 - 20,
     backgroundColor: 'red',
     borderRadius: 8,
     justifyContent: 'center',

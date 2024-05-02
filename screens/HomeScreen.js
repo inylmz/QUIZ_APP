@@ -7,7 +7,7 @@ const HomeScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../cyber.png')} // Siber güvenlik temalı arka plan görüntüsü
+      source={require('../cyber.png')} 
       style={styles.background}
       resizeMode="cover"
     >

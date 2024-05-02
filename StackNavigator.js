@@ -10,6 +10,7 @@ import BlueHomeScreen from './screens/BlueScreen/BlueHomeScreen';
 import BlueQuizScreen from './screens/BlueScreen/BlueQuizScreen';
 import BlueCardsScreen from './screens/BlueScreen/BlueCardsScreen';
 import RedCardsScreen from './screens/RedScreen/RedCardsScreen';
+import RedQuizTypeScreen from './screens/RedScreen/RedQuizTypeScreen'
 
 const StackNavigator = () => {
     const Stack = createNativeStackNavigator();
@@ -20,7 +21,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Red" component={RedHomeScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Blue" component={BlueHomeScreen} options={{headerShown:false}}/>        
         <Stack.Screen name="Results" component={ResultsScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="RedQuiz" component={RedQuizScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="RedQuiz" component={RedQuizTypeScreen} options={{headerShown:false}}/>
         <Stack.Screen name="BlueQuiz" component={BlueQuizScreen} options={{headerShown:false}}/>
         <Stack.Screen name="BlueCards" component={BlueCardsScreen} options={{headerShown:false}}/>
         <Stack.Screen name="RedHomeScreen" component={RedHomeScreen} options={{headerShown:false}}/>

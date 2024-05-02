@@ -11,18 +11,6 @@ const HomeScreen = () => {
           style={{ height: 390, width: "100%", resizeMode: "contain" }}
           source={require('../../assets/redteam.png') } 
         />
-
-        <View style={{ padding: 10 }}>
-          <Text
-            style={{
-              textAlign: "center",
-              color: "mediumblue",
-              fontSize: 20,
-              fontWeight: "600",
-            }}
-          >
-          </Text>
-
           <View
             style={{
               padding: 10,
@@ -31,7 +19,6 @@ const HomeScreen = () => {
               marginTop: 15,
             }}
           >
-            
             <View
               style={{
                 flexDirection: "row",
@@ -48,30 +35,10 @@ const HomeScreen = () => {
                   fontWeight: "500",
                 }}
               >
-              </Text>
-            </View>
-
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                marginVertical: 5,
-              }}
-            >
-              <Text style={{ color: "white" }}>•</Text>
-              <Text
-                style={{
-                  marginLeft: 4,
-                  color: "#722F37",
-                  fontSize: 15,
-                  fontWeight: "500",
-                }}
-              >
-                Tüm soruları zorunlu olarak cevaplamalısınız.
+                Quize başlamadan önce bilgi kartları ile pratik yapabilirsiniz.
               </Text>
             </View>
           </View>
-        </View>
 
         <Pressable
         onPress={() => navigation.navigate("RedQuiz")}

@@ -1,324 +1,100 @@
-import { StyleSheet, Text, SafeAreaView, View, Pressable } from "react-native";
-import React, { useState, useEffect } from "react";
-import questions from "../data/questions";
-import { useNavigation } from "@react-navigation/native";
-import { AntDesign } from "@expo/vector-icons";
-const QuizScreen = () => {
-  const navigation = useNavigation();
-  const data = questions;
-  const totalQuestions = data.length;
-  // points
-  const [points, setPoints] = useState(0);
+import React, { useState } from 'react';
+import { View, Text, Button } from 'react-native';
 
-  // index of the question
-  const [index, setIndex] = useState(0);
+// Import quiz data
+import { webAttacksQuiz, networkAttacksQuiz, penetrationTesterQuiz } from '../../data/redQuestions';
 
-  // answer Status (true or false)
-  const [answerStatus, setAnswerStatus] = useState(null);
-
-  // answers
-  const [answers, setAnswers] = useState([]);
-
-  // selected answer
+const RedQuizTypeScreen = () => {
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+  const [answers, setAnswers] = useState([]);
+  const [points, setPoints] = useState(0);
+  const [quizInProgress, setQuizInProgress] = useState(false);
 
-  // Counter
-  const [counter, setCounter] = useState(15);
-
-  // interval
-  let interval = null;
-
-  // progress bar
-  const progressPercentage = Math.floor((index/totalQuestions) * 100);
-
-  useEffect(() => {
-    if (selectedAnswerIndex !== null) {
-      if (selectedAnswerIndex === currentQuestion?.correctAnswerIndex) {
-        setPoints((points) => points + 10);
-        setAnswerStatus(true);
-        answers.push({ question: index + 1, answer: true });
-      } else {
-        setAnswerStatus(false);
-        answers.push({ question: index + 1, answer: false });
-      }
-    }
-  }, [selectedAnswerIndex]);
-
-  useEffect(() => {
+  const handleQuizSelection = (quizType) => {
+    setSelectedQuiz(quizType);
+    setCurrentQuestionIndex(0);
     setSelectedAnswerIndex(null);
-    setAnswerStatus(null);
-  }, [index]);
+    setAnswers([]);
+    setPoints(0);
+    setQuizInProgress(true);
+  };
 
-  useEffect(() => {
-    const myInterval = () => {
-      if (counter >= 1) {
-        setCounter((state) => state - 1);
-      }
-      if (counter === 0) {
-        setIndex(index + 1);
-        setCounter(15);
-      }
-    };
-
-    interval = setTimeout(myInterval, 1000);
-
-    // clean up
-    return () => {
-      clearTimeout(interval);
-    };
-  }, [counter]);
-
-  useEffect(() => {
-    if (index + 1 > data.length) {
-      clearTimeout(interval)
-      navigation.navigate("Results", {
-        answers: answers,
-        points: points,
-      });
+  const handleAnswer = (answerIndex) => {
+    setSelectedAnswerIndex(answerIndex);
+    const isCorrect = answerIndex === getCurrentQuestion().correctAnswerIndex;
+    setAnswers([...answers, { question: currentQuestionIndex + 1, answer: isCorrect }]);
+    if (isCorrect) {
+      setPoints(points + 10);
     }
-  }, [index]);
+  };
 
-  useEffect(() => {
-    if (!interval) {
-      setCounter(15);
+  const getCurrentQuestion = () => {
+    if (selectedQuiz === 'webAttacks') {
+      return webAttacksQuiz[currentQuestionIndex];
+    } else if (selectedQuiz === 'networkAttacks') {
+      return networkAttacksQuiz[currentQuestionIndex];
+    } else if (selectedQuiz === 'penetrationTester') {
+      return penetrationTesterQuiz[currentQuestionIndex];
     }
-  }, [index]);
+    return null;
+  };
 
-  const currentQuestion = data[index];
-  console.log(answerStatus)
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex + 1 < getCurrentQuiz().length) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedAnswerIndex(null);
+    } else {
+      // Handle quiz completion
+      setQuizInProgress(false);
+    }
+  };
+
+  const getCurrentQuiz = () => {
+    if (selectedQuiz === 'webAttacks') {
+      return webAttacksQuiz;
+    } else if (selectedQuiz === 'networkAttacks') {
+      return networkAttacksQuiz;
+    } else if (selectedQuiz === 'penetrationTester') {
+      return penetrationTesterQuiz;
+    }
+    return [];
+  };
+
+  const renderQuizQuestions = () => {
+    const currentQuestion = getCurrentQuestion();
+    if (!currentQuestion) return null;
+
+    return (
+      <View>
+        <Text>{currentQuestion.question}</Text>
+        {currentQuestion.options.map((option, index) => (
+          <Button
+            key={index}
+            title={option.answer}
+            onPress={() => handleAnswer(index)}
+          />
+        ))}
+        <Button
+          title={currentQuestionIndex + 1 === getCurrentQuiz().length ? 'Finish' : 'Next Question'}
+          onPress={handleNextQuestion}
+        />
+      </View>
+    );
+  };
 
   return (
-    <SafeAreaView>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: 10,
-        }}
-      >
-        <Pressable
-          style={{ padding: 10, backgroundColor: "magenta", borderRadius: 20 }}
-        >
-          <Text
-            style={{ color: "white", textAlign: "center", fontWeight: "bold" }}
-          >
-            {counter}
-          </Text>
-        </Pressable>
-      </View>
+    <View>
+      <Text>This is the Red Quiz Type Screen</Text>
+      <Button title="Web Attacks Quiz" onPress={() => handleQuizSelection('webAttacks')} />
+      <Button title="Network Attacks Quiz" onPress={() => handleQuizSelection('networkAttacks')} />
+      <Button title="Penetration Tester Quiz" onPress={() => handleQuizSelection('penetrationTester')} />
 
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginHorizontal: 10,
-        }}
-      >
-        
-        <Text>
-          ({index}/{totalQuestions}) Cevaplanan Sorular
-        </Text>
-      </View>
-
-      {/* Progress Bar */}
-      <View
-          style={{
-            backgroundColor: "white",
-            width: "100%",
-            flexDirection: "row",
-            alignItems: "center",
-            height: 10,
-            borderRadius: 20,
-            justifyContent: "center",
-            marginTop: 20,
-            marginLeft: 10,
-          }}
-        >
-          <Text
-            style={{
-              backgroundColor: "#FFC0CB",
-              borderRadius: 12,
-              position: "absolute",
-              left: 0,
-              height: 10,
-              right: 0,
-              width: `${progressPercentage}%`,
-              marginTop: 20,
-            }}
-          />
-        </View>
-
-      <View
-        style={{
-          marginTop: 30,
-          backgroundColor: "#F0F8FF",
-          padding: 10,
-          borderRadius: 6,
-        }}
-      >
-        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-          {currentQuestion?.question}
-        </Text>
-        <View style={{ marginTop: 12 }}>
-          {currentQuestion?.options.map((item, index) => (
-            <Pressable
-              onPress={() =>
-                selectedAnswerIndex === null && setSelectedAnswerIndex(index)
-              }
-              style={
-                selectedAnswerIndex === index &&
-              index === currentQuestion.correctAnswerIndex
-                  ? {
-                      flexDirection: "row",
-                      alignItems: "center",
-                      borderWidth: 0.5,
-                      borderColor: "#00FFFF",
-                      marginVertical: 10,
-                      backgroundColor: "green",
-                      borderRadius: 20,
-                    }
-                  : selectedAnswerIndex != null && selectedAnswerIndex === index
-                  ? {
-                      flexDirection: "row",
-                      alignItems: "center",
-                      borderWidth: 0.5,
-                      borderColor: "#00FFFF",
-                      marginVertical: 10,
-                      backgroundColor: "red",
-                      borderRadius: 20,
-                    }
-                  : {
-                      flexDirection: "row",
-                      alignItems: "center",
-                      borderWidth: 0.5,
-                      borderColor: "#00FFFF",
-                      marginVertical: 10,
-                      borderRadius: 20,
-                    }
-              }
-            >
-              {selectedAnswerIndex === index &&
-            index === currentQuestion.correctAnswerIndex ? (
-              <AntDesign
-              style={{
-                borderColor: "#00FFFF",
-                textAlign: "center",
-                borderWidth: 0.5,
-                width: 40,
-                height: 40,
-                borderRadius: 20,
-                padding: 10,
-              }}
-              name="check"
-              size={20}
-              color="white"
-            />
-              ) : selectedAnswerIndex != null &&
-                selectedAnswerIndex === index ? (
-                <AntDesign
-                  style={{
-                    borderColor: "#00FFFF",
-                    textAlign: "center",
-                    borderWidth: 0.5,
-                    width: 40,
-                    height: 40,
-
-                    padding: 10,
-                    borderRadius: 20,
-                  }}
-                  name="closecircle"
-                  size={20}
-                  color="white"
-                />
-              ) : (
-                <Text
-                  style={{
-                    borderColor: "#00FFFF",
-                    textAlign: "center",
-                    borderWidth: 0.5,
-                    width: 40,
-                    height: 40,
-                    borderRadius: 20,
-                    padding: 10,
-                  }}
-                >
-                  {item.options}
-                </Text>
-              )}
-
-              <Text style={{ marginLeft: 10 }}>{item.answer}</Text>
-            </Pressable>
-          ))}
-        </View>
-      </View>
-
-      <View
-        style={
-          answerStatus === null
-            ? null
-            : {
-                marginTop: 45,
-                backgroundColor: "#F0F8FF",
-                padding: 10,
-                borderRadius: 7,
-                height: 120,
-              }
-        }
-      >
-        {answerStatus === null ? null : (
-          <Text
-            style={
-              answerStatus == null
-                ? null
-                : { fontSize: 17, textAlign: "center", fontWeight: "bold" }
-            }
-          >
-            {!!answerStatus ? "Doğru Cevap" : "Yanlış Cevap"}
-          </Text>
-        )}
-
-        {index + 1 >= questions.length ? (
-          <Pressable
-            onPress={() =>
-              navigation.navigate("Results", {
-                points: points,
-
-                answers: answers,
-              })
-            }
-            style={{
-              backgroundColor: "green",
-              padding: 10,
-              marginLeft: "auto",
-              marginRight: "auto",
-              marginTop: 20,
-              borderRadius: 6,
-            }}
-          >
-            <Text style={{ color: "white" }}>Bitti</Text>
-          </Pressable>
-        ) : answerStatus === null ? null : (
-          <Pressable
-            onPress={() => setIndex(index + 1)}
-            style={{
-              backgroundColor: "green",
-              padding: 10,
-              marginLeft: "auto",
-              marginRight: "auto",
-              marginTop: 20,
-              borderRadius: 6,
-            }}
-          >
-            <Text style={{ color: "white" }}>Sonraki Soru</Text>
-          </Pressable>
-        )}
-      </View>
-    </SafeAreaView>
+      {/* Render selected quiz questions if quiz is in progress */}
+      {quizInProgress && renderQuizQuestions()}
+    </View>
   );
 };
 
-export default QuizScreen;
-
-const styles = StyleSheet.create({});
+export default RedQuizTypeScreen;
