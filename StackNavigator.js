@@ -27,6 +27,13 @@ const StackNavigator = () => {
         <Stack.Screen name="RedHomeScreen" component={RedHomeScreen} options={{headerShown:false}}/>
         <Stack.Screen name="RedCards" component={RedCardsScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Anasayfa" component={HomeScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Quiz" component={RedQuizScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="web" component={RedQuizScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="mobile" component={RedQuizScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="network" component={RedQuizScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="cryptography" component={RedQuizScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="burpsuite" component={RedQuizScreen} options={{headerShown:false}}/>
+        
       </Stack.Navigator>
     </NavigationContainer>
   )

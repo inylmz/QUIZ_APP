@@ -1,14 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Pressable, ScrollView } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import questions from '../../data/redQuestions'; 
-import { useNavigation } from '@react-navigation/native'; 
-const QuizScreen = () => {
+import React, { useState, useEffect } from "react";
+import { View, Text, SafeAreaView, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { AntDesign } from "@expo/vector-icons";
+import { webAttacksQuiz, networkAttacksQuiz, mobilAttacksQuiz, kriptolojiQuiz, pentestQuiz, burpSuiteQuiz } from '../../data/redQuestions';
+
+const QuizScreen = ({ route }) => {
+  const navigation = useNavigation();
+  const { category } = route.params;
+  const [questions, setQuestions] = useState([]);
+
+  switch (category) {
+    case 'Web':
+      questions = webAttacksQuiz;
+      break;
+    case 'Network':
+      questions = networkAttacksQuiz;
+      break;
+    case 'Mobile':
+      questions = mobilAttacksQuiz;
+      break;
+    case 'Cryptology':
+      questions = kriptolojiQuiz;
+      break;
+    case 'Pentest':
+      questions = pentestQuiz;
+      break;
+    case 'Burp Suite':
+      questions = burpSuiteQuiz;
+      break;
+    default:
+      break;
+  }
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const [answers, setAnswers] = useState([]);
   const [points, setPoints] = useState(0);
-  const navigation = useNavigation(); 
   const currentQuestion = questions[currentQuestionIndex];
 
   const handleAnswer = (answerIndex) => {
@@ -21,16 +48,11 @@ const QuizScreen = () => {
   };
 
   const handleNextQuestion = () => {
-    if (currentQuestionIndex + 1 < questions.length) {
+    if (questions.length > 0 && currentQuestionIndex + 1 < questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswerIndex(null);
     } else {
       navigation.navigate('Results', { 
-        answers: answers,
-        points: points,
-      });
-    
-      navigation.navigate('Results', { // Sonuçlar ekranına yönlendirme
         answers: answers,
         points: points,
       });
@@ -41,143 +63,53 @@ const QuizScreen = () => {
     }
   };
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.progressContainer}>
-        <Text style={styles.progressText}>
-          {currentQuestionIndex + 1}/{questions.length} Cevaplanan Sorular
-        </Text>
-        <View style={styles.progressBar}>
-          <View
-            style={{
-              backgroundColor: '#FFC0CB',
-              width: `${((currentQuestionIndex + 1) / questions.length) * 100}%`,
-              height: 10,
-              borderRadius: 20,
-            }}
-          />
-        </View>
+  if (questions.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>Sorular yüklenemedi. Lütfen daha sonra tekrar deneyin.</Text>
       </View>
-      <ScrollView>
-        <View style={styles.questionContainer}>
-          <Text style={styles.questionText}>{currentQuestion.question}</Text>
-          <View style={styles.optionsContainer}>
-            {currentQuestion.options.map((option, index) => (
-              <Pressable
-                key={index}
-                style={[
-                  styles.optionButton,
-                  selectedAnswerIndex === index && styles.selectedOption,
-                  selectedAnswerIndex !== null &&
-                    index === currentQuestion.correctAnswerIndex &&
-                    styles.correctOption,
-                ]}
-                onPress={() => handleAnswer(index)}
-              >
-                <Text style={styles.optionText}>{option.answer}</Text>
-                {selectedAnswerIndex === index && (
-                  <AntDesign
-                    name={index === currentQuestion.correctAnswerIndex ? 'check' : 'closecircle'}
-                    size={24}
-                    color="white"
-                  />
-                )}
-              </Pressable>
-            ))}
-          </View>
-        </View>
-        <View style={styles.buttonContainer}>
-          <Pressable style={styles.button} onPress={handleNextQuestion}>
-            <Text style={styles.buttonText}>
-              {currentQuestionIndex + 1 === questions.length ? 'Bitti' : 'Sonraki Soru'}
-            </Text>
-          </Pressable>
-        </View>
-      </ScrollView>
-      <Text style={styles.pointsText}>Puan: {points}</Text>
-    </SafeAreaView>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.questionText}>{currentQuestion.question}</Text>
+      <View style={styles.optionsContainer}>
+        {currentQuestion.options.map((option, index) => (
+          <Button
+            key={index}
+            title={option.answer}
+            onPress={() => handleAnswer(index)}
+          />
+        ))}
+      </View>
+      <Button
+        title={currentQuestionIndex + 1 === questions.length ? 'Finish' : 'Next Question'}
+        onPress={handleNextQuestion}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
-  },
-  progressContainer: {
-    paddingVertical: 40,
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  progressText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  progressBar: {
-    backgroundColor: 'white',
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 10,
-    borderRadius: 20,
     justifyContent: 'center',
-  },
-  pointsText: {
-    textAlign: 'center',
-    marginTop: 20,
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  questionContainer: {
-    marginVertical: 20,
+    alignItems: 'center',
+    padding: 20,
   },
   questionText: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 25,
+    marginBottom: 20,
   },
   optionsContainer: {
-    flexDirection: 'column',
+    width: '100%',
+    marginBottom: 20,
   },
-  optionButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 10,
-    marginVertical: 5,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: '#ccc',
-    backgroundColor: '#fff',
-  },
-  optionText: {
-    flex: 1,
-    marginRight: 10,
-  },
-  selectedOption: {
-    backgroundColor: '#007bff',
-    borderColor: '#007bff',
-  },
-  correctOption: {
-    backgroundColor: 'green',
-    borderColor: 'green',
-  },
-  buttonContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  button: {
-    backgroundColor: '#007bff',
-    paddingHorizontal: 60,
-    paddingVertical: 10,
-    borderRadius: 30,
-  },
-  buttonText: {
-    color: 'white',
+  errorText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    color: 'red',
   },
 });
 
